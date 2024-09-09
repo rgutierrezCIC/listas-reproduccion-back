@@ -3,6 +3,7 @@ package es.cic.curso08.listas_reproduccion.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ import es.cic.curso08.listas_reproduccion.service.TematicaService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/tematicas")
+@RequestMapping("/api/tematicas")
 public class TematicaController {
 
     @Autowired
@@ -40,14 +41,15 @@ public class TematicaController {
 
     // Crear una nueva temática
     @PostMapping
-    public ResponseEntity<Tematica> crearTematica(@Valid @RequestBody Tematica tematica) {
+    public ResponseEntity<Tematica> crearTematica(@RequestBody Tematica tematica) {
         Tematica nuevaTematica = tematicaService.guardarTematica(tematica);
-        return ResponseEntity.ok(nuevaTematica);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaTematica);
     }
 
     // Actualizar una temática existente
     @PutMapping("/{id}")
-    public ResponseEntity<Tematica> actualizarTematica(@PathVariable Long id, @Valid @RequestBody Tematica tematicaActualizada) {
+    public ResponseEntity<Tematica> actualizarTematica(@PathVariable Long id,
+            @Valid @RequestBody Tematica tematicaActualizada) {
         return tematicaService.obtenerPorId(id)
                 .map(tematicaExistente -> {
                     tematicaExistente.setNombre(tematicaActualizada.getNombre());

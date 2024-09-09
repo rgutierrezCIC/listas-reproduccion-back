@@ -11,8 +11,8 @@ import es.cic.curso08.listas_reproduccion.model.Tematica;
 public interface TematicaRepository extends JpaRepository<Tematica, Long> {
     List<Tematica> findByNombre(String nombre);
 
-    @Query("SELECT new com.example.dto.TematicaPopularidad(t.id, t.nombre, COUNT(v.id)) " +
-           "FROM Tematica t LEFT JOIN Video v ON t.id = v.tematica.id " +
-           "GROUP BY t.id, t.nombre")
+    @Query("SELECT new es.cic.curso08.listas_reproduccion.Dto.TematicaPopularidad(t.id, t.nombre, COUNT(v.id)) " +
+            "FROM Tematica t LEFT JOIN Video v ON t.id = v.tematica.id " +
+            "GROUP BY t.id, t.nombre")
     List<TematicaPopularidad> findTematicaPopularidad();
 }
