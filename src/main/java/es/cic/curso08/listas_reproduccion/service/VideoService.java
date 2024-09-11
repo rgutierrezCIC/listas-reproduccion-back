@@ -15,37 +15,34 @@ public class VideoService {
     @Autowired
     private VideoRepository videoRepository;
 
-    // Obtener todos los videos
     public List<Video> obtenerTodos() {
         return videoRepository.findAll();
     }
 
-    // Obtener un video por ID
     public Optional<Video> obtenerPorId(Long id) {
         return videoRepository.findById(id);
     }
 
-    // Buscar por título
     public List<Video> buscarPorTitulo(String titulo) {
         return videoRepository.findByTituloContaining(titulo);
     }
 
-    // Buscar por autor
     public List<Video> buscarPorAutor(String autor) {
-        return videoRepository.findByAutor(autor);
+        return videoRepository.findByAutorContaining(autor);
     }
 
-    // Buscar por clasificación
     public List<Video> buscarPorClasificacion(String clasificacion) {
         return videoRepository.findByClasificacion(clasificacion);
     }
 
-    // Guardar o actualizar un video
+    public List<Video> buscarPorTematicaId(Long tematicaId) {
+        return videoRepository.findByTematicaId(tematicaId);
+    }
+
     public Video guardarVideo(Video video) {
         return videoRepository.save(video);
     }
 
-    // Eliminar un video por ID
     public void eliminarVideo(Long id) {
         videoRepository.deleteById(id);
     }

@@ -14,8 +14,8 @@ CREATE TABLE video (
     duracion INT, -- Duración en minutos
     calidad VARCHAR(50),
     fecha_creacion DATE NOT NULL,
-    tematica_id BIGINT,
+    tematica_id BIGINT NOT NULL,
     clasificacion VARCHAR(2),
-    FOREIGN KEY (tematica_id) REFERENCES tematica(id) ON DELETE SET NULL,
+    FOREIGN KEY (tematica_id) REFERENCES tematica(id) ON DELETE RESTRICT,
     CHECK (clasificacion IN ('TP', '7', '12', '16', '18'))
 );

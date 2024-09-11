@@ -2,6 +2,8 @@ package es.cic.curso08.listas_reproduccion.Dto;
 
 public class TematicaPopularidad {
 
+    // pensado para una futura implementación de la funcionalidad de mostrar el número de videos por temática
+
     private Long id;
     private String nombre;
     private Long popularidad;

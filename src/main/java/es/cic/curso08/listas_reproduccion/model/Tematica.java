@@ -5,10 +5,13 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
@@ -34,6 +37,17 @@ public class Tematica {
 
     @NotNull(message = "La fecha de creación no puede estar vacía")
     private LocalDate fechaCreacion;
+
+    @OneToMany(mappedBy = "tematica")
+    private List<Video> videos;
+
+    public List<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
+    }
 
     public Long getId() {
         return id;

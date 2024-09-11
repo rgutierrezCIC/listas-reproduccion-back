@@ -1,7 +1,19 @@
 package es.cic.curso08.listas_reproduccion.model;
 
 import java.time.LocalDate;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Video {
@@ -10,20 +22,33 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "El título no puede ser nulo")
+    @Size(min = 1, max = 255, message = "El título debe tener entre 1 y 255 caracteres")
     private String titulo;
+
+    @NotNull(message = "El autor no puede ser nulo")
+    @Size(min = 1, max = 255, message = "El nombre del autor debe tener entre 1 y 255 caracteres")
     private String autor;
+
+    @Min(value = 1, message = "La duración debe ser al menos de 1 minuto")
+    @Max(value = 1440, message = "La duración máxima es de 1440 minutos (24 horas)")
     private int duracion; // Duración en minutos
+
+    @NotNull(message = "La calidad no puede ser nula")
+    @Pattern(regexp = "^(240p|360p|480p|720p|1080p|4K|8K)$", message = "La calidad debe ser una de las siguientes: 240p, 360p, 480p, 720p, 1080p, 4K, 8K")
     private String calidad;
 
     @Column(name = "fecha_creacion")
     private LocalDate fechaCreacion;
 
     @ManyToOne
-    @JoinColumn(name = "tematica_id", nullable = true)
+    @JoinColumn(name = "tematica_id", nullable = false)
     private Tematica tematica; // Relación con la entidad Tematica
 
+    @NotNull(message = "La clasificación no puede ser nula")
+    @Pattern(regexp = "^(TP|7|12|16|18)$", message = "La clasificación debe ser una de las siguientes: TP, 7, 12, 16, 18")
     @Column(length = 2)
-    private String clasificacion; // 'TP', '7', '12', '16', '18'
+    private String clasificacion;
 
     // Getters y Setters
     public Long getId() {
@@ -90,4 +115,3 @@ public class Video {
         this.clasificacion = clasificacion;
     }
 }
-
