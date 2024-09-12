@@ -39,6 +39,10 @@ public class VideoService {
         return videoRepository.findByTematicaId(tematicaId);
     }
 
+    public boolean existenVideosConTematica(Long tematicaId) {
+        return !videoRepository.findByTematicaId(tematicaId).isEmpty();
+    }
+
     public Video guardarVideo(Video video) {
         return videoRepository.save(video);
     }
