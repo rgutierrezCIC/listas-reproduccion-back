@@ -1,4 +1,4 @@
-CREATE TABLE tematica (
+CREATE TABLE IF NOT EXISTS tematica (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion VARCHAR(500),
@@ -7,7 +7,7 @@ CREATE TABLE tematica (
     fecha_creacion DATE NOT NULL
 );
 
-CREATE TABLE video (
+CREATE TABLE IF NOT EXISTS video(
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(255) NOT NULL,
     autor VARCHAR(255) NOT NULL,
