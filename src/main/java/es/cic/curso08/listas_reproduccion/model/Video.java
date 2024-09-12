@@ -15,6 +15,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Video {
 
@@ -43,6 +45,7 @@ public class Video {
 
     @ManyToOne
     @JoinColumn(name = "tematica_id", nullable = false)
+    @JsonIgnoreProperties("videos")
     private Tematica tematica; // Relación con la entidad Tematica
 
     @NotNull(message = "La clasificación no puede ser nula")
